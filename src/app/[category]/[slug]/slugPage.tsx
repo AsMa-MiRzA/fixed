@@ -1,16 +1,16 @@
 "use client";
 
-import { FaShoppingCart, FaHeart, FaPlus, FaMinus } from "react-icons/fa";
+import { FaHeart, FaPlus, FaMinus } from "react-icons/fa";
 import { Button } from "../../../../components/ui/button";
 import SlugComponent from "../../../../components/ui/slugComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useState } from "react";
-import { addToCart } from "@<prefix>/app/store/features/cart";
+import AddToCartToast from "../../../../components/addToCartToast";
 
 const SlugPage = ({ params }: any) => {
   const product = useAppSelector((state) => state.products);
   const slug = product.filter((val)=> val.slug == params.slug);
-  const dispatch = useAppDispatch()
+  
   const [cartItem, setCartItem] = useState({
     id: slug[0].id,
     title: slug[0].title,
@@ -159,11 +159,13 @@ const SlugPage = ({ params }: any) => {
                 </div>
               {/* ) */}
               {/* button/add to cart */}
-              <Button onClick= {()=>dispatch(addToCart(cartItem))}
+              {/* <Button onClick= {()=>dispatch(addToCart(cartItem))}
               className="group bg-myBlackHead hover:bg-transparent text-myWhite hover:text-myBlackHead scroll-m-20 text-sm font-semibold tracking-tight rounded-xl">
                 <FaShoppingCart className="mr-2 h-4 w-4 group-hover:text-myOrange duration-300" />
                 Add To Cart
-              </Button>
+              </Button> */}
+              <AddToCartToast cartItem = {cartItem} />
+
             </div>
             {/* button/buy now */}
             <Button className="mt-3 w-full group bg-myBlackHead hover:bg-transparent text-myWhite hover:text-myBlackHead scroll-m-20 text-sm font-semibold tracking-tight rounded-xl">
